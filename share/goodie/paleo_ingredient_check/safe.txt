@@ -4,7 +4,6 @@ apple
 artichoke hearts
 asparagus
 avocado
-avocado
 avocado oil
 bacon
 bananas
@@ -37,7 +36,6 @@ chicken thigh
 chicken wings
 chuck steak
 clams
-clams
 coconut oil
 crab
 crawfish
@@ -65,7 +63,6 @@ lamb rack
 lean veal
 lemon
 lime
-lobster
 lobster
 lychee
 macadamia nuts
@@ -100,11 +97,9 @@ rattlesnake
 red snapper
 reindeer
 salmon
-salmon
 sardines
 scallops
 shark
-shrimp
 shrimp
 spinach
 steak
