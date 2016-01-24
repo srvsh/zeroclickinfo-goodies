@@ -4,9 +4,13 @@ package DDG::Goodie::CheatSheets;
 use JSON::XS;
 use DDG::Goodie;
 use DDP;
+use Try::Tiny;
+use File::Basename;
 use File::Find::Rule;
 
 no warnings 'uninitialized';
+
+dev_essential 1;
 
 zci answer_type => 'cheat_sheet';
 zci is_cached   => 1;
@@ -33,10 +37,18 @@ sub getAliases {
     foreach my $file (@files) {
         open my $fh, $file or warn "Error opening file: $file\n" and next;
         my $json = do { local $/;  <$fh> };
-        my $data = eval { decode_json($json) } or do {
-            warn "Failed to decode $file: $@";
-            next;
-        };
+        my $data;
+
+	try {
+		$data = decode_json($json);
+	}
+	catch {
+		# remove line number information from error message since it is
+		# meant for end users
+		my $error = ($_ =~ s/(.*) at .*?\z/$1/sr);
+
+		die 'Error decoding cheatsheet file ' . basename($file) . ". Please validate the JSON: $error\n";
+	};
 
         my $defaultName = File::Basename::fileparse($file);
         $defaultName =~ s/-/ /g;
